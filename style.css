@@ -7,30 +7,28 @@
 
 :root {
   --text-color: white;
-  --bg-url: url("./assets/bg-desktop.jpg");
+  --bg-url: url(./assets/bg-desktop.jpg);
   --stroke-color: rgba(255, 255, 255, 0.5);
-  --surface-color: rgba(255, 255, 255, 0.1);
-  --surface-color-hover: rgba(255, 255, 255, 0.02);
-  --social-link-hover: rgba(255, 255, 255, 0.2);
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(255, 255, 255, 0.2);
   --switch-bg-url: url(./assets/moon-stars.svg);
-
 }
 
 .light {
   --text-color: black;
-  --bg-url: url("./assets/bg-desktop-light.jpg");
+  --bg-url: url(./assets/bg-desktop-light.jpg);
   --stroke-color: rgba(0, 0, 0, 0.5);
   --surface-color: rgba(0, 0, 0, 0.05);
   --surface-color-hover: rgba(0, 0, 0, 0.02);
-  --social-link-hover: rgba(0, 0, 0, 0.2);
+  --highlight-color: rgba(0, 0, 0, 0.1);
   --switch-bg-url: url(./assets/sun.svg);
-
 }
 
 /*------------------ BODY ---------------------------- */
 body {
-  /* background: color image repeat position/size*/
-  background-image: var(--bg-url);
+  background: var(--bg-url);
+  height: 100vh;
 }
 
 body * {
@@ -40,7 +38,8 @@ body * {
 
 /*------------------  CONTAINER ---------------------------- */
 #container {
-  width: 360px;
+  width: 100%;
+  max-width: 588px;
   margin: 56px auto 0px;
   padding: 0 24px;
 }
@@ -73,19 +72,24 @@ body * {
   width: 32px;
   height: 32px;
   background: white var(--switch-bg-url) no-repeat center;
-  border: 0px;
-  border-radius: 50px;
+  border: 0;
+  border-radius: 50%;
 
-  position: absolute; /* Sobreposição de camadas */
+  position: absolute;
   top: 50%;
   left: 0;
   z-index: 1;
   transform: translateY(-50%);
-} 
+
+  animation: slide-back 0.2s;
+}
 
 .light #switch button {
-  right: 0;
-  left:initial ;
+  animation: slide-in 0.2s forwards;
+}
+
+#switch button:hover {
+  outline: 8px solid var(--highlight-color);
 }
 
 #switch span {
@@ -93,12 +97,11 @@ body * {
   width: 64px;
   height: 24px;
   background: var(--surface-color);
-
   border: 1px solid var(--stroke-color);
+  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 9999px;
 }
-
 /*------------------ links ---------------------------- */
 #links {
   list-style: none;
@@ -133,7 +136,7 @@ tag a é um display inline por padrão */
 /* pseudo selector :hover */
 #links li a:hover {
   background: var(--surface-color-hover);
-  border: 1px solid var(--text-color);
+  border: 1.5px solid var(--text-color);
 }
 
 /*------------------ social links ---------------------------- */
@@ -156,12 +159,50 @@ tag a é um display inline por padrão */
 }
 
 #social-links a:hover {
-  background: var(--social-link-hover);
-  
+  background: var(--highlight-color);
 }
 /*------------------ footer ---------------------------- */
 footer {
   padding: 24px 0;
   text-align: center;
   font-size: 14px;
+}
+
+/*------------------ media queries
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+---------------------------- */
+@media (min-width: 576px) and (max-width: 768px) {
+  :root {
+    --bg-url: url(./assets/bg-mobile.jpg);
+  }
+
+  .light {
+    --bg-url: url(./assets/bg-mobile-light.jpg);
+  }
+    body {
+    background: var(--bg-url) no-repeat top center/cover;
+  }
+}
+
+/* --------------- animation do switch ----------------------------*/
+@keyframes slide-in {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
+  }
 }
