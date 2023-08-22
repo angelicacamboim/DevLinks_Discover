@@ -53,6 +53,8 @@ body * {
 /* img é elemento inline por isso não se aplica margin auto */
 #profile img {
   width: 112px;
+  border-radius: 50%;
+
 }
 
 #profile p {
