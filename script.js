@@ -12,6 +12,6 @@ function toggleMode() {
     img.setAttribute("alt", "Light: Avatar de oculos de sol")
   } else {
     img.setAttribute("src", "./assets/avatar.png")
-    img.setAttribute("alt", "Night: Avatar de oculos de grau")
+    img.setAttribute("alt", "Night: Avatar sem oculos")
   }
 }
